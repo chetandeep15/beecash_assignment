@@ -1,0 +1,25 @@
+<h1 class="text-center">List of Events</h1>
+<div class="container">
+  <div class="col-xs-12">
+    <div class="row">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @events.each do |event| %>
+            <tr>
+              <td><%= link_to(event.name, event_path(event)) %></td>
+              <td><%= event.start_time.strftime("%d.%m.%Y %H:%M") %></td>
+              <td><%= event.end_time.strftime("%d.%m.%Y %H:%M") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

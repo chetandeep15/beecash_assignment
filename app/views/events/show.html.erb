@@ -1,0 +1,46 @@
+<div>
+  <h1><%= @event.name %></h1>
+</div>
+
+<div class="row">
+  Start Time: <%= @event.start_time.strftime("%d.%m.%Y %H:%M") %>
+  End Time: <%= @event.end_time.strftime("%d.%m.%Y %H:%M") %>
+</div>
+
+<% if user_signed_in? && @event.is_future_event? %>
+  <div class="pull-right">
+    <% if current_user.is_attending_event?(@event.id)%>
+      <div>
+        <%= link_to("Un-attend", unattend_event_path , method: :delete, class: 'btn btn-default btn-primary' ) %>
+      </div>
+    <% else %>
+      <div>
+        <%= link_to("Attend", attend_event_path , method: :post, class: 'btn btn-default btn-primary' ) %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="row">
+  <h3>
+    Users Attending
+  </h3>
+</div>
+<div class="row">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Gender</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.gender %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
